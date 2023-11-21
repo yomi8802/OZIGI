@@ -52,5 +52,6 @@ public class Power : MonoBehaviour, IPointerClickHandler, IPointerDownHandler, I
         GetComponent<SpriteRenderer>().color = new Color32(123,214,64,255);
         body.GetComponent<Bow>().iv = power;
         body.GetComponent<Bow>().bow();
+        this.gameObject.SetActive(false);
     }
 }
