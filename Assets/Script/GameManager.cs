@@ -5,9 +5,9 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    public static int round = 0;
+    public static int round = 0; //ラウンド数
 
-    public static float diff = 0;
+    public static float diff = 0; //合計誤差
 
     public Bow bow;
 
@@ -15,9 +15,10 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI Degree;
     public TextMeshProUGUI Resistance;
 
+    //各ラウンド初期設定
     public void Awake()
     {
-        switch(GameManager.round)
+        switch(round)
         {
             case 0:
                 break;

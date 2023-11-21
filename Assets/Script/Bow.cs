@@ -40,25 +40,29 @@ public class Bow : MonoBehaviour
     bool isbow = false;
     bool isBarMove = false;
 
-    public void Start()
+    //目標角度設定
+    void Start()
     {
         Bar.transform.RotateAround(center, axis, -target);
     }
 
-    // Update is called once per frame
+    //お辞儀
     public void bow()
     {
-        iv /= res;
-        float dulation = iv * 0.1f;
+        iv /= res; //抵抗に応じて初速度を減速
+        
+        //初速度に応じた長さでお辞儀を実行
+        //お辞儀終了後GetAngleを実行
+        float duration = iv * 0.1f;
         isbow = true;
-        DOTween.To(() => iv, (x) => iv = x, 0, dulation).SetEase(Ease.OutCirc).OnComplete(GetAngle);
+        DOTween.To(() => iv, (x) => iv = x, 0, duration).SetEase(Ease.OutCirc).OnComplete(GetAngle);
     }
 
     void Update()
     {
         if (isbow)
         {
-            transform.RotateAround(center, axis, -iv / res);
+            transform.RotateAround(center, axis, -iv / res); //上半身回転
         }
         if (isBarMove)
         {
@@ -83,6 +87,7 @@ public class Bow : MonoBehaviour
         degree = rad * Mathf.Rad2Deg;
 
         //上方向を0°に変換
+        //unityではx軸正の向きを0度として+-180度で計算される
         degree = 360 - (degree + 180);
         if (degree < 90)
         {
@@ -104,16 +109,20 @@ public class Bow : MonoBehaviour
         StartCoroutine("BarMove");
     }
 
+    //結果表示
     IEnumerator BarMove()
     {
+        //上半身位置にバー表示
         MoveBar.transform.RotateAround(center, axis, -degree);
 
+        //上半身位置から目標角度まで動く
         DOTween.To(() => bar, (x) => bar = x, result, 3).SetEase(Ease.OutCirc);
 
         isBarMove = true;
 
         yield return new WaitForSeconds(5);
 
+        //次ステージへ
         fade.StartCoroutine("SceneChange");
     }
 }

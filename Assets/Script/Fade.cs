@@ -10,13 +10,8 @@ public class Fade : MonoBehaviour
     public Image fadeObj;
     float fade = 0;
     bool isfade = false;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
+    //最初のクリックでフェード＋シーンチェンジ
     void Update()
     {
         if(GameManager.round == 0 && Input.GetMouseButtonDown(0))
@@ -34,15 +29,19 @@ public class Fade : MonoBehaviour
 
     IEnumerator SceneChange()
     {
+        //game画面の場合、シーンチェンジまでに猶予を持たせる
         if(1 <= GameManager.round && GameManager.round <= 3)
         {
             yield return new WaitForSeconds(2);
         }
+
+        //α値をイージング
         DOTween.To (() => fade, (x) => fade = x, 255, 8).SetEase(Ease.InExpo);
         isfade = true;
 
         yield return new WaitForSeconds(5);
 
+        //次ステージに移動
         GameManager.round++;
         switch(GameManager.round)
         {

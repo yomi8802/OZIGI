@@ -49,8 +49,10 @@ public class Result : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //finishテキストフェードイン
         finishText.color = new Color(0, 0, 0, alpha);
-        Debug.Log(alpha);
+
+        //タイトルに戻る
         if (returnTitle && Input.GetMouseButtonDown(0))
         {
             Destroy(GameObject.Find("AudioManager"));
@@ -63,6 +65,7 @@ public class Result : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
 
+        //フェードイン用
         DOTween.To(() => alpha, (x) => alpha = x, 255, 3).SetEase(Ease.InExpo);
         returnTitle = true;
     }

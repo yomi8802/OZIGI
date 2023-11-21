@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Power : MonoBehaviour, IPointerClickHandler, IPointerDownHandler, IPointerUpHandler
+public class Power : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     public GameObject body;
     public float power;
@@ -14,26 +14,16 @@ public class Power : MonoBehaviour, IPointerClickHandler, IPointerDownHandler, I
     bool isClick = false;
     bool Clicked = false;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void FixedUpdate()
     {
+        //クリックしている間パワーを貯める
         if(isClick && !Clicked)
         {
             power += add;
         }
     }
 
-    public void OnPointerClick(PointerEventData eventData)
-    {
-
-    }
-
+    //クリック開始
     public void OnPointerDown(PointerEventData eventData)
     {
         if(power == 0)
@@ -44,13 +34,13 @@ public class Power : MonoBehaviour, IPointerClickHandler, IPointerDownHandler, I
         }
     }
 
+    //クリック終了
     public void OnPointerUp(PointerEventData eventData)
     {
         isClick = false;
         Clicked = true;
         GetComponent<AudioSource>().Stop();
-        GetComponent<SpriteRenderer>().color = new Color32(123,214,64,255);
-        body.GetComponent<Bow>().iv = power;
+        body.GetComponent<Bow>().iv = power; //お辞儀の初速度をパワーに設定
         body.GetComponent<Bow>().bow();
         this.gameObject.SetActive(false);
     }

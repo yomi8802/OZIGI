@@ -3,36 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Close : MonoBehaviour, IPointerClickHandler, IPointerDownHandler, IPointerUpHandler
+public class Close : MonoBehaviour, IPointerDownHandler
 {
     public HowTo Button;
     public GameObject HowToPlay;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    public void OnPointerClick(PointerEventData eventData)
-    {
-
-    }
-
+    //遊び方ボタン非表示
     public void OnPointerDown(PointerEventData eventData)
     {
+        //非表示にすると効果音が再生されないため、開く側のボタンから音を鳴らす
         Button.Close();
         HowToPlay.gameObject.SetActive(false);
-    }
-
-    public void OnPointerUp(PointerEventData eventData)
-    {
-
     }
 }
