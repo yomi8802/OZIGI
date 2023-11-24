@@ -18,7 +18,7 @@ public class Bow : MonoBehaviour
     //初速度
     public float iv = 50;
 
-    //抵抗
+    //抵抗感
     public float res = 10;
 
     //目標角度
@@ -87,7 +87,7 @@ public class Bow : MonoBehaviour
         degree = rad * Mathf.Rad2Deg;
 
         //上方向を0°に変換
-        //unityではx軸正の向きを0度として+-180度で計算される
+        //この手法だとx軸正の向きを0度として+-180度で計算される
         degree = 360 - (degree + 180);
         if (degree < 90)
         {

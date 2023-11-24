@@ -5,11 +5,11 @@ using UnityEngine.EventSystems;
 
 public class Power : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
-    public GameObject body;
-    public float power;
+    [SerializeField]GameObject body;
+    float power = 0;
 
-    public float add = 1f;
-    public AudioClip Charge;
+    [SerializeField]float add = 1f;
+    [SerializeField]AudioClip Charge;
 
     bool isClick = false;
     bool Clicked = false;
